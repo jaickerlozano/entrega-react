@@ -9,6 +9,7 @@ El objetivo principal es demostrar el dominio de los fundamentos de React, Hooks
 Puedes ver el proyecto funcionando aquí:
 👉 **[Ver Despliegue en GitHub Pages](https://jaickerlozano.github.io/entrega-react/)**
 
+![Captura de pantalla](./public/capture-entrega-react.png)
 ---
 
 ## 🛠️ Tecnologías Utilizadas
