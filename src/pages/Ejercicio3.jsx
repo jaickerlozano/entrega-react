@@ -6,7 +6,7 @@ Crea una página con un campo de texto, un botón que diga "Agregar", y una list
 nuevo elemento de la lista.
 ● Añade un botón al lado de cada elemento para eliminarlo de la lista.
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Ejercicio3() {
@@ -15,7 +15,19 @@ export default function Ejercicio3() {
     
     // 2. CORRECCIÓN: Estado para la lista (para que no se borre al renderizar)
     // Inicializamos con un array vacío []
-    const [listItems, setListItems] = useState([]);
+    const [listItems, setListItems] = useState(() => {
+        const savedList = localStorage.getItem('mi_primer_lista');
+        if (savedList) {
+            return JSON.parse(savedList);
+        } else {
+            return [];
+        }
+    });
+
+    // Efecto para guardar
+    useEffect(() => {
+        localStorage.setItem('mi_primer_lista', JSON.stringify(listItems));
+    }, [listItems]);
 
     const handleChange = (e) => {
         setItem(e.target.value);
@@ -71,12 +83,12 @@ export default function Ejercicio3() {
                     {listItems.map((tarea, index) => (
                         <li key={index} className="flex justify-between items-center p-3 bg-gray-100 rounded border border-gray-200 text-gray-700">
                             
-                            <span className="font-medium">{tarea}</span> 
+                            <span className="font-medium break-all">{tarea}</span> 
 
                             {/* Pasamos el index a la función mediante una arrow function */}
                             <button 
                                 onClick={() => handleClickEliminar(index)}
-                                className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded shadow transition-colors text-sm"
+                                className="ml-3 bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded shadow transition-colors text-sm"
                             >
                                 Eliminar
                             </button>
